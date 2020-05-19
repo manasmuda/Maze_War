@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 18e096a98c2704c40a818dd1214cd179
+folderAsset: yes
+<<<<<<< HEAD
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
+timeCreated: 1503666358
+licenseType: Store
+DefaultImporter:
+  userData:
+  assetBundleName:
+  assetBundleVariant:
+>>>>>>> parent of 60c1789... Revert "c1"
