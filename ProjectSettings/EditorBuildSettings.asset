@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Login.unity
+    guid: 718a244fa50696047a1eef500ff5a93d
+  - enabled: 1
+    path: Assets/Home.unity
+    guid: e595d13de46549c468348ba42c00f1c7
+  - enabled: 1
+    path: Assets/MatchMacking.unity
+    guid: ee0ec029e65878b429ab550014be9eac
+  - enabled: 1
+    path: Assets/game_scene.unity
+    guid: 4b4c7e995cc5d62489dcb141dcd8365c
+  m_configObjects: {}
