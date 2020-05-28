@@ -15,7 +15,7 @@ public class MyCharacterModel
     public int hp;
     public int ammo;
     public string charType;
-    public int store;
+    public List<int> store;
     public bool newC;
 
     public void Initialize(string s,float x,float y,int z)
@@ -34,7 +34,7 @@ public class MyCharacterModel
         {
             ammo = 3;
         }
-        store=0;
+        store=new List<int> { };
         hp = 100;
         invisiblePower = false;
         skillPower = false;
@@ -70,7 +70,7 @@ public class MyCharacterModel
         myCharacterModel.hp = dict.GetValue<int>("hp");
         myCharacterModel.posX = dict.GetValue<float>("posX");
         myCharacterModel.posY = dict.GetValue<float>("posY");
-        myCharacterModel.store = dict.GetValue<int>("store");
+        myCharacterModel.store = dict.GetValue<List<int>>("store");
         myCharacterModel.invisiblePower = dict.GetValue<bool>("invisiblePower");
         myCharacterModel.hpPower= dict.GetValue<bool>("hpPower");
         myCharacterModel.skillPower = dict.GetValue<bool>("skillPower");

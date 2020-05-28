@@ -188,6 +188,25 @@ CapsuleCollider:
   m_Height: 1.9999999
   m_Direction: 1
   m_Center: {x: -0.00000756979, y: 0, z: -0.00000008940696}
+--- !u!95 &1240122885
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4523895293706556338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &1826298620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -279,7 +298,7 @@ MonoBehaviour:
   hpPower: 0
   hp: 0
   ammo: 0
-  store: 0
+  store: 
   damage: 0
   position: 0
   myTeam: 0
@@ -295,6 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5b06060aa5479498e431b78ff62aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onCallMove: 0
+  route: []
+  pathIndex: 0
+  rb: {fileID: 0}
 --- !u!95 &39267108
 Animator:
   serializedVersion: 3
@@ -303,25 +326,6 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8604185950528032653}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &1240122885
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4523895293706556338}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
@@ -428,7 +432,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7905f85785e023c468a833e997f78563,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Shooter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7905f85785e023c468a833e997f78563, type: 3}

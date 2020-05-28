@@ -11,8 +11,7 @@ public class CharacterScript : MonoBehaviour
     public bool hpPower;
     public int hp;
     public int ammo;
-    public int store;
-    public List<int> storeList;
+    public List<int> store;
     public int damage;
     public int position;
     public bool myTeam;
@@ -47,12 +46,11 @@ public class CharacterScript : MonoBehaviour
             ammo = 3;
             damage = 300;
         }
-        store = 0;
         hp = 100;
         invisiblePower = false;
         skillPower = false;
         hpPower = false;
-        storeList = new List<int> { };
+        store = new List<int> { };
     }
 
     public void assignData(MyCharacterModel model)
@@ -151,8 +149,7 @@ public class CharacterScript : MonoBehaviour
 
     public void AddItem(int position)
     {
-        store++;
-        storeList.Add(position);
+        store.Add(position);
     }
 
 }

@@ -21,9 +21,10 @@ public class CollectionItemScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        gameObject.SetActive(false);
-        if (collider.tag == "Player")
+        Debug.Log(collider.tag);
+        if (collider.tag == "Collector")
         {
+            gameObject.SetActive(false);
             Debug.Log("Collection Item Triggered");
             CharacterScript tempScript = collider.gameObject.GetComponent<CharacterScript>();
             if (tempScript.charType=="Collector")

@@ -125,7 +125,7 @@ public class MatchMakingScript : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("uid", user.UserId);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/createRoomFriend", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/createRoomFriend", form);
         www.timeout = 40;
         yield return www.SendWebRequest();
 
@@ -155,7 +155,7 @@ public class MatchMakingScript : MonoBehaviour
         Playerprefs.roomCode = roomCodeInput.text;
         form.AddField("uid", user.UserId);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/joinRoomFriend", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/joinRoomFriend", form);
         yield return www.SendWebRequest();
 
 
@@ -184,7 +184,7 @@ public class MatchMakingScript : MonoBehaviour
         form.AddField("roomCode", Playerprefs.roomCode);
         form.AddField("uid", user.UserId);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/waitRoomFriend", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/waitRoomFriend", form);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)

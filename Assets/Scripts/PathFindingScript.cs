@@ -11,6 +11,7 @@ public class PathFindingScript
         Debug.Log("PathFinding started");
         bool shortPathAchieved = false;
         List<List<Vector2>> routePaths = new List<List<Vector2>> { };
+        List<bool> routeBlocked = new List<bool> { };
         
         int i = (int)source.x;
         int j = (int)source.y;
@@ -18,6 +19,7 @@ public class PathFindingScript
         int curPath = 0;
         routePaths.Add(new List<Vector2> { });
         routePaths[0].Add(source);
+        routeBlocked.Add(false);
         
         while (!shortPathAchieved)
         {
@@ -109,10 +111,18 @@ public class PathFindingScript
                 countR--;
                 left = false;
             }
+            int ti = (int)routePaths[curPath][routePaths[curPath].Count - 1].x;
+            int tj = (int)routePaths[curPath][routePaths[curPath].Count - 1].y;
+  
+            if (curSet && !(ti == (int)dest.x && tj == (int)dest.y))
+            {
+                routeBlocked[curPath] = true;
+            }
           
                 for (int k = 0; k < countR; k++)
                 {
                     routePaths.Add(new List<Vector2> { });
+                    routeBlocked.Add(false);
                     for(int k1 = 0; k1 < tempCurVectors.Count; k1++)
                     {
                         routePaths[routePaths.Count - 1].Add(tempCurVectors[k1]);
@@ -208,7 +218,7 @@ public class PathFindingScript
                 int sd = (int)(Mathf.Abs(routePaths[k][routePaths[k].Count - 1].x - source.x) + Mathf.Abs(routePaths[k][routePaths[k].Count - 1].y - source.y));
                 int dd = (int)(Mathf.Abs(routePaths[k][routePaths[k].Count - 1].x - dest.x) + Mathf.Abs(routePaths[k][routePaths[k].Count - 1].y - dest.y));
                 int tempv = sd + dd;
-                if (tempv<min)
+                if (tempv<min && !routeBlocked[k])
                 {
                     min = tempv;
                     minPos = k;
@@ -221,14 +231,14 @@ public class PathFindingScript
             {
                 shortPathAchieved = true;
             }
-            /*for(int mx = 0; mx < routePaths.Count; mx++)
+            for(int mx = 0; mx < routePaths.Count; mx++)
             {
                 for(int nx = 0; nx < routePaths[mx].Count; nx++)
                 {
                     Debug.Log("Route " + mx.ToString() + ": " + routePaths[mx][nx].x.ToString() + "," + routePaths[mx][nx].y.ToString());
                 }
                 Debug.Log("route " + mx.ToString() + " end");
-            }*/
+            }
         }
 
         return routePaths[curPath];

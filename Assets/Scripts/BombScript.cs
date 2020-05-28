@@ -27,7 +27,8 @@ public class BombScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player")
+        Debug.Log("Bomb hit: " + collider.tag);
+        if (collider.tag == "Collector" || collider.tag == "Shooter" || collider.tag == "Bomber")
         {
             Debug.Log("trigger started");
             CharacterScript tempScript = collider.gameObject.GetComponent<CharacterScript>();

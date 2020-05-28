@@ -27,16 +27,22 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        gameObject.SetActive(false);
-        if (collider.tag == "Player")
+        Debug.Log("Bullet hit: " + collider.tag);
+        if (collider.tag == "Collector" || collider.tag == "Shooter" || collider.tag == "Bomber")
         {
             Debug.Log("trigger started");
             CharacterScript tempScript = collider.gameObject.GetComponent<CharacterScript>();
             if ((!tempScript.myTeam && myTeam) || (tempScript.myTeam && !myTeam))
             {
                 tempScript.OnBulletHit(damage);
+                gameObject.SetActive(false);
             }
         }
+        else if (collider.tag == "wall")
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 
     void OnCollisionExit(Collision collision)

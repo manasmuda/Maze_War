@@ -189,24 +189,10 @@ MonoBehaviour:
   hpPower: 0
   hp: 0
   ammo: 0
-  store: 0
+  store: 
   damage: 0
   position: 0
   myTeam: 0
---- !u!114 &3954577979877163626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6658467110635060485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217aa63b299a1024e9e1f689d47a3bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonControl: {fileID: 0}
-  bombPrefab: {fileID: 0}
 --- !u!114 &2017740402897733969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +207,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onCallMove: 0
   route: []
+  pathIndex: 0
+  rb: {fileID: 0}
+--- !u!114 &3954577979877163626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658467110635060485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217aa63b299a1024e9e1f689d47a3bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonControl: {fileID: 0}
+  bombPrefab: {fileID: 0}
 --- !u!1 &7202566415989226000
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +435,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7905f85785e023c468a833e997f78563,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Bomber
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7905f85785e023c468a833e997f78563,
         type: 3}

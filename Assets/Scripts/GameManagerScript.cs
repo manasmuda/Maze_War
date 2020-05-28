@@ -18,6 +18,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject Collector;
     public GameObject Bomber;
 
+    public GameObject storageUnit;
+
     public GameObject charCamera;
     public GameObject shooterCamera;
     public GameObject collectorCamera;
@@ -34,6 +36,7 @@ public class GameManagerScript : MonoBehaviour
     public CanvasGroup AddCharacterPanel;
     public CanvasGroup ShooterPanel;
     public CanvasGroup BomberPanel;
+    public CanvasGroup CollectorPanel;
     public CanvasGroup PlayPanel;
     public CanvasGroup MyCharactersPanel;
     public CanvasGroup MapsPanel;
@@ -84,9 +87,14 @@ public class GameManagerScript : MonoBehaviour
     private int selectedCharacterIndex = -1;
     private List<Dictionary<string,object>> mybombLocale;
     private List<Dictionary<string, object>> oppbombLocale;
+    private int myStorageLoc;
+    private int oppStorageLoc;
 
     private int characterPoints = 50;
     private int powerPoints = 50;
+
+    private GameObject myStorageUnit;
+    private GameObject oppStorageUnit;
 
     public GameObject blankCamera;
 
@@ -139,6 +147,8 @@ public class GameManagerScript : MonoBehaviour
         myData.initialize();
         oppData = new OppData();
         oppData.initialize();
+        myStorageLoc = 871;
+        oppStorageLoc = 29;
         addShooterButton.onClick.AddListener(addShooter);
         addCollectorButton.onClick.AddListener(addCollector);
         addBomberButton.onClick.AddListener(addBomber);
@@ -150,6 +160,7 @@ public class GameManagerScript : MonoBehaviour
         hidePanel(PlayPanel);
         hidePanel(ShooterPanel);
         hidePanel(BomberPanel);
+        hidePanel(CollectorPanel);
         hidePanel(MapsPanel);
         hidePanel(AddCharacterPanel);
         hidePanel(MyCharactersPanel);
@@ -603,6 +614,7 @@ public class GameManagerScript : MonoBehaviour
         hidePanel(PlayPanel);
         hidePanel(ShooterPanel);
         hidePanel(BomberPanel);
+        hidePanel(CollectorPanel);
         showPanel(CharacterSelectionPanel);
         hidePanel(CurCharDataPanel);
         blankCamera.SetActive(true);
@@ -657,7 +669,7 @@ public class GameManagerScript : MonoBehaviour
         form.AddField("roomCode", Playerprefs.roomCode);
         form.AddField("uid", user.UserId);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/gameStart", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/gameStart", form);
         yield return www.SendWebRequest();
         
         if (www.isNetworkError || www.isHttpError)
@@ -683,6 +695,24 @@ public class GameManagerScript : MonoBehaviour
                     List<int> maze = snapshot.GetValue<List<int>>("maze");
                     List<int> items = snapshot.GetValue<List<int>>("items");
                     List<bool> itemsEnabled = snapshot.GetValue<List<bool>>("itemsEnabled");
+                    if (Playerprefs.playerPos == 1)
+                    {
+                        myStorageLoc = snapshot.GetValue<int>("storeLoc1");
+                        oppStorageLoc = snapshot.GetValue<int>("storeLoc2");
+                        myStorageLoc = 0;
+                        oppStorageLoc = 899;
+                    }
+                    else
+                    {
+                        myStorageLoc = snapshot.GetValue<int>("storeLoc2");
+                        oppStorageLoc = snapshot.GetValue<int>("storeLoc1");
+                        myStorageLoc = 899;
+                        oppStorageLoc = 0;
+                    }
+                    myStorageUnit = Instantiate(storageUnit, new Vector3(6 * (myStorageLoc % 30) - 87, 1.7f, 87 - 6 * ((int)(myStorageLoc / 30))), Quaternion.Euler(-90, 90, 0));
+                    myStorageUnit.GetComponent<StorageUnitScript>().myTeam = true;
+                    oppStorageUnit = Instantiate(storageUnit, new Vector3(6 * (oppStorageLoc % 30) - 87, 1.7f, 87 - 6 * ((int)(oppStorageLoc / 30))), Quaternion.Euler(-90, 90, 0));
+                    oppStorageUnit.GetComponent<StorageUnitScript>().myTeam = false;
                     turn = snapshot.GetValue<string>("turn");
                     Debug.Log(maze[0]);
                     mazeData = new int[30, 30];
@@ -798,6 +828,7 @@ public class GameManagerScript : MonoBehaviour
         hidePanel(PlayPanel);
         hidePanel(ShooterPanel);
         hidePanel(BomberPanel);
+        hidePanel(CollectorPanel);
         hidePanel(WaitingPanel);
         showPanel(MapsPanel);
         showPanel(AddCharacterPanel);
@@ -817,6 +848,7 @@ public class GameManagerScript : MonoBehaviour
         hidePanel(PlayPanel);
         hidePanel(ShooterPanel);
         hidePanel(BomberPanel);
+        hidePanel(CollectorPanel);
         hidePanel(CurCharDataPanel);
         hidePanel(CharacterListPanel);
         showPanel(WaitingPanel);
@@ -896,7 +928,7 @@ public class GameManagerScript : MonoBehaviour
         form.AddField("playerPos", Playerprefs.playerPos.ToString());
         form.AddField("turnsCount", turnsCount);
         Debug.Log("startedCDS1");
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/checkDataStatus", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/checkDataStatus", form);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -931,7 +963,7 @@ public class GameManagerScript : MonoBehaviour
         form.AddField("turnsCount", turnsCount);
         setSettingOpponentTurn();
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/checkOpponentStart", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/checkOpponentStart", form);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -1064,7 +1096,7 @@ public class GameManagerScript : MonoBehaviour
         form.AddField("roomId", Playerprefs.roomId);
         form.AddField("playerPos", Playerprefs.playerPos.ToString());
 
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/setStartTurn", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/setStartTurn", form);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -1173,7 +1205,7 @@ public class GameManagerScript : MonoBehaviour
         form.AddField("roomId", Playerprefs.roomId);
         form.AddField("playerPos", Playerprefs.playerPos.ToString());
         
-        UnityWebRequest www = UnityWebRequest.Post("https://us-central1-maze-war.cloudfunctions.net/waitForTurn", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://asia-east2-maze-war.cloudfunctions.net/waitForTurn", form);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -1352,7 +1384,7 @@ public class GameManagerScript : MonoBehaviour
         }
         else if (characterScript.charType.Equals("Collector"))
         {
-
+            characterSelected.GetComponent<CollectorControl>().enabled = true;
         }
         else if (characterScript.charType.Equals("Bomber"))
         {
@@ -1370,7 +1402,7 @@ public class GameManagerScript : MonoBehaviour
         }
         else if (characterScript.charType.Equals("Collector"))
         {
-
+            characterSelected.GetComponent<CollectorControl>().enabled = false;
         }
         else if (characterScript.charType.Equals("Bomber"))
         {
@@ -1444,6 +1476,17 @@ public class GameManagerScript : MonoBehaviour
 
     public void ItemDeactivate(int x)
     {
+        Debug.Log("Item Deactivated: " + x.ToString());
         itemsEnabledData[x] = false;
+    }
+
+    public void showCollectorPanel()
+    {
+        showPanel(CollectorPanel);
+    }
+
+    public void hideCollectorPanel()
+    {
+        hidePanel(CollectorPanel);
     }
 }

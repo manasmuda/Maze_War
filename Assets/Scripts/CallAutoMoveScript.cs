@@ -28,10 +28,44 @@ public class CallAutoMoveScript : MonoBehaviour
             int cy = (int)((transform.position.x + 90.0f) / 6);
             int px = (int)route[pathIndex].x;
             int py = (int)route[pathIndex].y;
-
-            if(cx!=px || cy != py)
+            
+            if(cx!=px || cy!= py)
             {
-                pathIndex++;
+                int dxc = -87 + cy * 6;
+                int dyc = 87 - cx * 6;
+                if (((int)transform.position.x) == dxc || ((int)transform.position.z) == dyc)
+                {
+                    pathIndex++;
+                }
+                else
+                {
+                    int dirx = 1;
+                    int diry = 0;
+                    if (((int)transform.position.x) > dxc)
+                    {
+                        dirx = -1;
+                        diry = 0;
+                    }
+                    else if(((int)transform.position.x) < dxc)
+                    {
+                        dirx = 1;
+                        diry = 0;
+                    }
+                    else if(((int)transform.position.y) > dyc)
+                    {
+                        dirx = 0;
+                        diry = -1;
+                    }
+                    else
+                    {
+                        dirx = 0;
+                        diry = 1;
+                    }
+                    Vector3 vec = transform.position;
+                    vec.z = vec.z + diry * 1.3f * Time.deltaTime;
+                    vec.x = vec.x + dirx * 1.3f * Time.deltaTime;
+                    rb.MovePosition(vec);
+                }
             }
             else if (pathIndex < route.Count - 1)
             {
@@ -43,6 +77,11 @@ public class CallAutoMoveScript : MonoBehaviour
                 rb.MovePosition(vec);
             }
         }
+    }
+
+    void MoveToCenter()
+    {
+
     }
 
     public void StopMove()

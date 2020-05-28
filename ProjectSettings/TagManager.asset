@@ -7,6 +7,9 @@ TagManager:
   - wall
   - bullet
   - bomb
+  - Collector
+  - Bomber
+  - Shooter
   layers:
   - Default
   - TransparentFX

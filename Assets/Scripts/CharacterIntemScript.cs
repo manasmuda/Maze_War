@@ -20,7 +20,7 @@ public class CharacterIntemScript : MonoBehaviour
 
     public int hp;
     public int ammo;
-    public int store;
+    public List<int> store;
 
     public GameManagerScript gameManagerScript;
     
@@ -34,7 +34,7 @@ public class CharacterIntemScript : MonoBehaviour
     public void InitializeCharacter()
     {
         hp = 100;
-        store = 0;
+        store = new List<int> { };
         if (charTypeTxt.text.Equals("Shooter"))
         {
             ammo = 10;
